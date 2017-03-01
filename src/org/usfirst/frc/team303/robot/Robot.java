@@ -1,7 +1,8 @@
 package org.usfirst.frc.team303.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -12,22 +13,31 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	final String defaultAuto = "Default";
-	final String customAuto = "My Auto";
-	String autoSelected;
-	SendableChooser<String> chooser = new SendableChooser<>();
-
-	/**
+	static Camera camera;
+	static Drivebase drivebase;
+	static Timer timer = new Timer();
+	static Autonomous auto;
+	static PowerDistributionPanel pdp;
+	static Intake intake;
+	static double clawSetpoint = 0, intakeSetpoint = 0, clawWheelSetpoint = 0, clawRotation = 0;
+	static OI oi = new OI();
+	/*
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		chooser.addDefault("Default Auto", defaultAuto);
-		chooser.addObject("My Auto", customAuto);
-		SmartDashboard.putData("Auto choices", chooser);
+		pdp = new PowerDistributionPanel(RobotMap.PDP);
+		drivebase = new Drivebase();
+		//	chooser.addDefault("Default Auto", defaultAuto);
+		//chooser.addObject("My Auto", customAuto);
+		//SmartDashboard.putData("Auto choices", chooser);
 	}
-
+	
+	public void robotPeriodic() {
+		OI.update();
+		OI.outputs();
+	}
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -40,18 +50,18 @@ public class Robot extends IterativeRobot {
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 */
 	@Override
-	public void autonomousInit() {
+	/*public void autonomousInit() {
 		autoSelected = chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + autoSelected);
-	}
+	}*/
 
 	/**
 	 * This function is called periodically during autonomous
 	 */
-	@Override
-	public void autonomousPeriodic() {
+	//@Override
+	/*public void autonomousPeriodic() {
 		switch (autoSelected) {
 		case customAuto:
 			// Put custom auto code here
@@ -62,12 +72,15 @@ public class Robot extends IterativeRobot {
 			break;
 		}
 	}
-
+*/
 	/**
 	 * This function is called periodically during operator control
 	 */
-	@Override
+	//@Override
 	public void teleopPeriodic() {
+		drivebase.drive(OI.lY, OI.rY);
+		intake.control();
+		
 	}
 
 	/**

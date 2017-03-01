@@ -1,7 +1,7 @@
 package org.usfirst.frc.team303.robot;
 
 public class RobotMap {
-
+	public static final int PDP = 0;
 	public static final int FR = 2;
 	public static final int FL = 13;
 	public static final int BR = 55;
@@ -18,5 +18,6 @@ public class RobotMap {
 	public static final int RCLAWWHEEL = 22;
 	public static final int INTAKEWHEELS = 4;
 	public static final boolean INTAKEWHEELS_INV = false;
+	public static final int CLIMBER_CLIMB_BUTTON = 2;
 	
 }
