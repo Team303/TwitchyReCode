@@ -9,7 +9,7 @@ import com.kauailabs.navx.frc.AHRS;
 public class Drivebase {
 	CANTalon FL;
 	CANTalon FR;
-	CANTalon BL; //swagmoney
+	CANTalon BL; 
 	CANTalon BR;
 	RobotDrive drivebase;
 	AHRS navX;

@@ -14,10 +14,10 @@ public class Intake {
 	
 	public void control(){
 		if(OI.lBtn[2]){
-			set(1);
+			set(1.0);
 		}
 		else if(OI.lBtn[3]){
-			set(-1);
+			set(-1.0);
 		}
 		else if(!OI.lBtn[RobotMap.CLIMBER_CLIMB_BUTTON]){
 			set(0);
